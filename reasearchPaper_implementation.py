@@ -15,8 +15,12 @@ import class_IHOMFAC
 class data_gen:
     def __init__(self):
         # end of lists below (y and u) represent newest elements while first element is oldest
-        self.lst_y = [0]*3 # list of measured outputs
-        self.lst_u = [0]*2 # list of measured control inputs
+        # self.lst_y = [0]*3 # list of measured outputs
+        # self.lst_u = [0]*2 # list of measured control inputs
+        
+        self.lst_y = list(range(1,4)) # list of measured outputs
+        self.lst_u = list(range(1,3))# list of measured control inputs
+        
         self.t = 0
         
     def output_meas(self, u):
@@ -61,7 +65,7 @@ alpha = [0.5, 0.25, 1/8, 1/8]
 beta = [0.5, 0.25, 1/8, 1/16, 1/32, 1/32]
 
 obj_data = data_gen()
-obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=1)
+obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=0.1)
 
 for k in t:
     y_meas = obj_data.output_meas(obj_IHOMFAC.u[0].reshape(()))
@@ -72,3 +76,6 @@ plt.plot(t, obj_data.lst_y[3:])
 plt.grid()
 plt.ylim((-2,2))
 plt.xlim((0,1000))
+plt.show()
+
+plt.plot(t, obj_data.lst_u[2:])

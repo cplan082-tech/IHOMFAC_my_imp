@@ -19,8 +19,11 @@ class IHOMFAC:
         self.alpha = np.array(alpha).reshape(1,-1) # row vec
         self.beta = np.array(beta).reshape(1,-1) # row vec
         
-        self.y = np.array([y_init]*2)
-        self.u = np.array([u_init]*len(alpha)).reshape(-1,1) # col vec
+        # self.y = np.array([y_init]*2)
+        # self.u = np.array([u_init]*len(alpha)).reshape(-1,1) # col vec
+        self.y = np.array(list(range(1,3)))
+        self.u = np.array(list(range(1, len(alpha)+1))).reshape(-1,1) # col vec
+        
         self.u[1] = 1 # for testing
         
         self.phi_init = phi_init
