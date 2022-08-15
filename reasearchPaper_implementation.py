@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy import pi
 import class_IHOMFAC
+import pandas as pd
 # plt.rcParams['figure.figsize'] = [20, 10]
 
 
@@ -62,11 +63,11 @@ eta = 0.8
 lam = 0.1
 mu = 0.01
 ro = 0.8
-eps = 1e-6
+eps = 1e-15
 alpha = [0.5, 0.25, 1/8, 1/8]
 beta = [0.5, 0.25, 1/8, 1/16, 1/32, 1/32]
 
-obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=0.9)
+obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=0.1)
 
 y_meas = 0 # initial output measurment
 
@@ -89,16 +90,23 @@ for k in t:
     lst_y.append(y_meas)
 
 
+[lst_u.pop(0) for _ in range(2)] # removes first two elements from lst_u (init vals)
+[lst_y.pop(0) for _ in range(3)] # removes first three elements from lst_y (init vals)
+
+
 plt.plot(t, lst_y_setpoint)
-plt.plot(t, lst_y[3:])
+plt.plot(t, lst_y)
 plt.grid()
 plt.ylim((-2,2))
 plt.xlim((0,1000))
 plt.show()
 
-plt.plot(t, lst_u[2:])
-plt.show()
+# plt.plot(t, lst_u[2:])
+# plt.show()
 
-plt.plot(t[:150], lst_y_setpoint[:150])
-plt.plot(t[:150], lst_u[2:152])
+# zoom_range_low = 850
+# zoom_range_high = 950 # 252
+# plt.plot(t[zoom_range_low:zoom_range_high], lst_y_setpoint[zoom_range_low:zoom_range_high])
+# plt.plot(t[zoom_range_low:zoom_range_high], lst_u[(zoom_range_low ):(zoom_range_high)])
+
 
