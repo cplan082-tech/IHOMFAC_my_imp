@@ -11,38 +11,6 @@ import class_IHOMFAC
 import pandas as pd
 # plt.rcParams['figure.figsize'] = [20, 10]
 
-
-class data_gen:
-    def __init__(self):
-        # end of lists below (y and u) represent newest elements while first element is oldest
-        self.lst_y = [0]*3 # list of measured outputs
-        self.lst_u = [0]*2 # list of measured control inputs
-        
-        # self.lst_y = list(range(1,4)) # list of measured outputs
-        # self.lst_u = list(range(1,3))# list of measured control inputs
-        
-        self.t = 0
-        
-    def output_meas(self, u):
-        # append new control input to end of list
-        self.lst_u.append(u)
-        
-        # lst index [-1] signifies time t, [-2] signifies time (t-1) and so on
-        if self.t <= 500:
-            y_meas = self.lst_y[-1]/(1 + self.lst_y[-1]**2) + self.lst_u[-1]**3
-            
-        else:
-            y_meas = ((self.lst_y[-1]*self.lst_y[-2]*self.lst_y[-3]*self.lst_u[-2]*
-                     (self.lst_y[-3] - 1) + round(self.t/500)*self.lst_u[-1])/
-                     (1 + self.lst_y[-2]**2 + self.lst_y[-3]**2))
-        
-        # append new output measurment to end of list
-        self.lst_y.append(y_meas)
-        self.t += 1
-        return y_meas
-    
-    
-
 def desired_output(t):
     if (t <= 300) or (t > 700):
         y = 0.5*(-1)**(round(t/100))
@@ -72,10 +40,7 @@ obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init
 y_meas = 0 # initial output measurment
 
 for k in t:
-    # # For testing vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    # if k == 30:
-    #     print("hit")
-    #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     obj_IHOMFAC.run_algo(y_meas, lst_y_setpoint[k])
     
     lst_u.append(obj_IHOMFAC.u[0].reshape(())) # TODO: check if this is giving what we want
@@ -107,9 +72,9 @@ plt.show()
 # plt.plot(t, lst_u[2:])
 # plt.show()
 
-zoom_range_low = 130
-zoom_range_high = 150 # 252
-plt.plot(t[zoom_range_low:zoom_range_high], lst_y_setpoint[zoom_range_low:zoom_range_high])
-plt.plot(t[zoom_range_low:zoom_range_high], lst_y[(zoom_range_low ):(zoom_range_high)])
+# zoom_range_low = 130
+# zoom_range_high = 150 # 252
+# plt.plot(t[zoom_range_low:zoom_range_high], lst_y_setpoint[zoom_range_low:zoom_range_high])
+# plt.plot(t[zoom_range_low:zoom_range_high], lst_y[(zoom_range_low ):(zoom_range_high)])
 
 
