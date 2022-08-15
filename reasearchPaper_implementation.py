@@ -72,7 +72,10 @@ obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init
 y_meas = 0 # initial output measurment
 
 for k in t:
-    
+    # # For testing vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+    # if k == 30:
+    #     print("hit")
+    #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     obj_IHOMFAC.run_algo(y_meas, lst_y_setpoint[k])
     
     lst_u.append(obj_IHOMFAC.u[0].reshape(())) # TODO: check if this is giving what we want
@@ -104,9 +107,9 @@ plt.show()
 # plt.plot(t, lst_u[2:])
 # plt.show()
 
-# zoom_range_low = 850
-# zoom_range_high = 950 # 252
-# plt.plot(t[zoom_range_low:zoom_range_high], lst_y_setpoint[zoom_range_low:zoom_range_high])
-# plt.plot(t[zoom_range_low:zoom_range_high], lst_u[(zoom_range_low ):(zoom_range_high)])
+zoom_range_low = 130
+zoom_range_high = 150 # 252
+plt.plot(t[zoom_range_low:zoom_range_high], lst_y_setpoint[zoom_range_low:zoom_range_high])
+plt.plot(t[zoom_range_low:zoom_range_high], lst_y[(zoom_range_low ):(zoom_range_high)])
 
 

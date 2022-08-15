@@ -46,9 +46,6 @@ class IHOMFAC:
         self.y = shift(self.y, 1, cval=y_meas) # shifts y arr right and replaces first val with new y meas
         self.y[np.abs(self.y) < self.eps] = 0
         
-        # TESTINGVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-#         print(np.shape(self.beta))
-#         print(np.shape(self.phi))
         sum_beta = np.reshape(self.beta@self.phi, (()))
         del_u_t_1 = np.reshape(self.u[1] - self.u[2], (()))
         del_y_t = np.array(self.y[0] - self.y[1])
