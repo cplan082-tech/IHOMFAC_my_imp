@@ -20,9 +20,10 @@ def desired_output(t):
 
     return y
 
-
-t = [i for i in range(1001)]
+sim_len = 1000
+t = [i for i in range(sim_len + 1)]
 lst_y_setpoint = [desired_output(t_i) for t_i in t]
+# lst_y_setpoint = [0.5*(-1)**(round(t[i]/200)) for i in range(len(t))]
 
 lst_y = [0]*3 # list of measured outputs
 lst_u = [0]*2 # list of measured control inputs
@@ -35,7 +36,7 @@ eps = 1e-15
 alpha = [0.5, 0.25, 1/8, 1/8]
 beta = [0.5, 0.25, 1/8, 1/16, 1/32, 1/32]
 
-obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=0.1)
+obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=0.1) # best phi_init = 0.1
 
 y_meas = 0 # initial output measurment
 
@@ -66,7 +67,7 @@ plt.plot(t, lst_y_setpoint)
 plt.plot(t, lst_y)
 plt.grid()
 plt.ylim((-2,2))
-plt.xlim((0,1000))
+plt.xlim((0,sim_len))
 plt.show()
 
 # plt.plot(t, lst_u[2:])
