@@ -36,7 +36,7 @@ eps = 1e-15
 alpha = [0.5, 0.25, 1/8, 1/8]
 beta = [0.5, 0.25, 1/8, 1/16, 1/32, 1/32]
 
-obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=0.1) # best phi_init = 0.1
+obj_IHOMFAC = class_IHOMFAC.IHOMFAC(eta, lam, mu, ro, eps, alpha, beta, phi_init=0.05) # best phi_init = 0.1
 
 y_meas = 0 # initial output measurment
 
